@@ -1,11 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { PageInfo } from "../typings";
+import { urlFor } from "../sanity";
 
-// https://media-exp1.licdn.com/dms/image/C5603AQEUKXqT28-39g/profile-displayphoto-shrink_400_400/0/1658476972270?e=1676505600&v=beta&t=BQXS5Qnduu19noVce9wQYzPqvtimLdJ3zo4pzxMb16Q
+type Props = {
+    pageInfo: PageInfo;
+};
 
-type Props = {};
-
-const About = (props: Props) => {
+const About = ({ pageInfo }: Props) => {
     return (
         <motion.div
             initial={{
@@ -35,33 +37,19 @@ const About = (props: Props) => {
                     duration: 1.2,
                 }}
                 viewport={{ once: true }}
-                src="https://i.pinimg.com/564x/e0/d4/93/e0d493be29e02c4ba5eb041ac0f3d4a0.jpg"
-                className="-mb-20 md:mb-0 flex-shrink-0 w-56 h-56 rounded-full object-cover md:rounded-lg md:w-64 md:h-96 xl:w-[500px] xl:h-[600px] object-top"
+                src={urlFor(pageInfo?.profilePicture).url()}
+                className="-mb-20 md:mb-0 flex-shrink-0 w-40 h-40 rounded-full object-cover md:rounded-lg md:w-64 md:h-96 xl:w-[500px] xl:h-[600px] object-top"
             />
 
             <div className="space-y-10 px-0 md:px-10">
-                <h4 className="text-4xl font-semibold">
+                <h4 className="text-3xl font-semibold">
                     Here is a{" "}
                     <span className="underline decoration-[#F7AB0A]/50">
                         little
                     </span>{" "}
                     background
                 </h4>
-                <p className="text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Curabitur fermentum porttitor nisi sit amet accumsan. Sed
-                    congue varius mi eget suscipit. Mauris vitae elit auctor,
-                    pellentesque massa ac, varius dolor. Quisque id felis
-                    libero. In congue egestas diam, sed auctor erat sodales a.
-                    Duis rutrum magna ac felis ultricies consequat. Donec in
-                    lacinia velit. Phasellus ac malesuada arcu, a commodo
-                    sapien. Sed sodales porta quam sed dapibus. Donec ut risus
-                    ante. Curabitur et ipsum ac arcu ultricies efficitur.
-                    Vestibulum euismod enim quam, at faucibus metus hendrerit
-                    in. Aenean non enim vitae sapien fringilla convallis.
-                    Phasellus iaculis convallis nisi. Curabitur eget malesuada
-                    nisl.
-                </p>
+                <p className="text-md">{pageInfo?.backgroundInformation}</p>
             </div>
         </motion.div>
     );
