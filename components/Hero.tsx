@@ -1,14 +1,18 @@
 import Link from "next/link";
 import React from "react";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
+import { urlFor } from "../sanity";
+import { PageInfo } from "../typings";
 import BackgroundCircles from "./BackgroundCircles";
 
-type Props = {};
+type Props = {
+    pageInfo: PageInfo;
+};
 
-const Hero = (props: Props) => {
+const Hero = ({ pageInfo }: Props) => {
     const [text, count] = useTypewriter({
         words: [
-            "Hey, Luqman Here",
+            `Hey, ${pageInfo?.name} Here`,
             "Web Developer",
             "React",
             "JavaScript",
@@ -23,12 +27,12 @@ const Hero = (props: Props) => {
             {/* Change to nextjs image and whitelist later */}
             <img
                 className="relative rounded-full h-32 w-32 mx-auto object-cover"
-                src="https://media-exp1.licdn.com/dms/image/C5603AQEUKXqT28-39g/profile-displayphoto-shrink_400_400/0/1658476972270?e=1676505600&v=beta&t=BQXS5Qnduu19noVce9wQYzPqvtimLdJ3zo4pzxMb16Q"
+                src={urlFor(pageInfo?.heroImage)}
                 alt=""
             />
             <div className="z-20">
                 <h2 className="text-sm uppercase text-gray-500 pb-2 tracking-[15px]">
-                    Software Engineer
+                    {pageInfo?.role}
                 </h2>
                 <h1 className="text-5xl lg:text-6xl font-semibold px-10">
                     <span className="mr-3">{text}</span>
