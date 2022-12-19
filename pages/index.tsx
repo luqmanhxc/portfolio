@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { GetStaticProps } from "next";
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 import About from "../components/About";
 import ContactMe from "../components/ContactMe";
@@ -15,6 +16,7 @@ import { fetchPageInfo } from "../utils/fetchPageInfo";
 import { fetchProjects } from "../utils/fetchProjects";
 import { fetchSkills } from "../utils/fetchSkills";
 import { fetchSocials } from "../utils/fetchSocials";
+import UpCircle from "images/up-circle.svg";
 
 type Props = {
     pageInfo: PageInfo;
@@ -50,7 +52,7 @@ const Home = ({ pageInfo, experiences, skills, projects, socials }: Props) => {
             </section>
 
             <section id="projects" className="snap-start">
-                <Projects />
+                <Projects projects={projects} />
             </section>
 
             <section id="contact" className="snap-start">
@@ -60,10 +62,12 @@ const Home = ({ pageInfo, experiences, skills, projects, socials }: Props) => {
             <Link href="#hero">
                 <footer className="sticky bottom-5 w-full cursor-pointer">
                     <div className="flex items-center justify-center">
-                        <img
+                        <Image
                             className="h-10 w-10 rounded-full grayscale hover:grayscale-0"
-                            src="https://media-exp1.licdn.com/dms/image/C5603AQEUKXqT28-39g/profile-displayphoto-shrink_400_400/0/1658476972270?e=1676505600&v=beta&t=BQXS5Qnduu19noVce9wQYzPqvtimLdJ3zo4pzxMb16Q"
-                            alt=""
+                            src={UpCircle}
+                            alt="Back to top button"
+                            width="40"
+                            height="40"
                         />
                     </div>
                 </footer>

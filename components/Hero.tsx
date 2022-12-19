@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
@@ -13,10 +14,10 @@ const Hero = ({ pageInfo }: Props) => {
     const [text, count] = useTypewriter({
         words: [
             `Hey, ${pageInfo?.name} Here`,
-            "Web Developer",
-            "React",
-            "JavaScript",
-            "Tailwind",
+            "<Web Development />",
+            "Machine Learning",
+            "Data",
+            "Design",
         ],
         loop: true,
         delaySpeed: 2000,
@@ -24,12 +25,17 @@ const Hero = ({ pageInfo }: Props) => {
     return (
         <div className="h-screen flex flex-col space-y-8 items-center justify-center text-center overflow-hidden">
             <BackgroundCircles />
-            {/* Change to nextjs image and whitelist later */}
-            <img
-                className="relative rounded-full h-32 w-32 mx-auto object-cover"
-                src={urlFor(pageInfo?.heroImage)}
-                alt=""
-            />
+            <div className="mx-auto">
+                <Image
+                    src={urlFor(pageInfo?.heroImage).url()}
+                    alt={`${pageInfo.name} Image`}
+                    height={128}
+                    width={128}
+                    className="rounded-full"
+                    style={{ objectFit: "cover" }}
+                    priority
+                />
+            </div>
             <div className="z-20">
                 <h2 className="text-sm uppercase text-gray-500 pb-2 tracking-[15px]">
                     {pageInfo?.role}
