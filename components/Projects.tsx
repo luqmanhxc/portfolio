@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Project } from "../typings";
 import { urlFor } from "../sanity";
+import Image from "next/image";
 
 type Props = {
     projects: Project[];
@@ -14,7 +15,7 @@ const Projects = ({ projects }: Props) => {
                 Projects
             </h3>
 
-            <div className="relative w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20 scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A] scrollbar-thin">
+            <div className="relative w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20 scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A] scrollbar-thin">
                 {projects.map((project, i) => (
                     <motion.div
                         key={project?._id}
@@ -23,14 +24,20 @@ const Projects = ({ projects }: Props) => {
                         transition={{ duration: 1.5 }}
                         className="w-screen flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center p-20 md:p-44 h-screen"
                     >
-                        <motion.img
+                        <motion.div
                             initial={{ y: -300, opacity: 0 }}
                             transition={{ duration: 1.2 }}
                             whileInView={{ y: 0, opacity: 1 }}
                             viewport={{ once: true }}
-                            src={urlFor(project?.image).url()}
-                            alt={`${project?.title} Image`}
-                        />
+                            className="w-full h-full relative"
+                        >
+                            <Image
+                                src={urlFor(project?.image).url()}
+                                alt={`${project?.title} Image`}
+                                fill
+                                objectFit="contain"
+                            />
+                        </motion.div>
 
                         <div className="space-y-10 px-0 md:px-10 max-w-6xl">
                             <h4 className="text-4xl font-semibold text-center">
@@ -42,10 +49,13 @@ const Projects = ({ projects }: Props) => {
 
                             <div className="flex space-x-4 items-center justify-center">
                                 {project?.technologies.map((technology) => (
-                                    <img
+                                    <Image
                                         key={technology._id}
                                         src={urlFor(technology.image).url()}
-                                        className="w-10 h-10"
+                                        alt=""
+                                        width="40"
+                                        height="40"
+                                        objectFit="contain"
                                     />
                                 ))}
                             </div>
